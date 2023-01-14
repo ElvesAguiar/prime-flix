@@ -2,12 +2,13 @@
 import { useEffect, useState } from "react";
  import api from '../../services/api'
  import { Link } from "react-router-dom"; 
- import './home.css'
+ import './home.css';
 
 //URL DA API: movie/now_playing?api_key=3976d2a147b98c9113783fca3aee342c&language=pt-BR
 
 function Home(){
 const [filmes, setFilmes] = useState([]);
+const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
     async function loadFilmes(){
@@ -21,10 +22,20 @@ const [filmes, setFilmes] = useState([]);
   )
      // console.log(reponse.data.results.slice(0,10));
      setFilmes(reponse.data.results.slice(0,10));
-}
+     setLoading(false);
+};
 
     loadFilmes();
   },[])
+
+
+    if(loading === true){
+      return(
+        <div className="loading">
+          <h2>Carregando filmes...</h2>
+        </div>
+      );
+    };
 
     return(
       <div className="container">
@@ -40,7 +51,7 @@ const [filmes, setFilmes] = useState([]);
           })}
         </div>
       </div>
-    )
-  }
+    );
+  };
   
   export default Home;
