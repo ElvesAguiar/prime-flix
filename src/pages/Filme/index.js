@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams,useNavigate } from 'react-router-dom'
+import { useParams,useNavigate, json } from 'react-router-dom'
 import './filme-info.css'
 
 import api from '../../services/api';
@@ -37,6 +37,53 @@ function Filme(){
       console.log("COMPONENTE FOI DESMONTADO")
     }
   }, [navigate,id])
+/*
+  function salvarFilme (){
+    const minhalista = localStorage.getItem("@primeflix");
+
+    let filmesSalvos= JSON.parse(minhalista.getItem) || [] ;
+
+    const hasFilme =filmesSalvos.some((filmesSalvo)=> filmesSalvo.id === filme.id);
+
+    if(hasFilme === true){
+      alert('esse filme já está na lista');
+      return;
+    }
+    filmesSalvos.push(filme);
+    localStorage.setItem("@primeflix", JSON.stringify(filmesSalvos));
+    alert( 'filme salvo com sucesso');
+
+
+  }*/
+
+  function salvarFilme(){
+    const minhaLista = localStorage.getItem("@primeflix");
+
+    let filmesSalvos = JSON.parse(minhaLista) || [];
+
+    const hasFilme = filmesSalvos.some( (filmesSalvo) => filmesSalvo.id === filme.id)
+
+    if(hasFilme){
+      alert("ESSE FILME JÁ ESTA NA LISTA");
+      return;
+    }
+
+    filmesSalvos.push(filme);
+    localStorage.setItem("@primeflix", JSON.stringify(filmesSalvos));
+    alert("FILME SALVO COM SUCESSO")
+
+  }
+
+  if(loading){
+    return(
+      <div className="filme-info">
+        <h1>Carregando detalhes...</h1>
+      </div>
+    )
+  }
+
+
+
 
   if(loading){
     return(
@@ -57,7 +104,7 @@ function Filme(){
       <strong>Avalição: {filme.vote_average} / 10</strong>
 
       <div className='area-button'>
-        <button>Salvar</button>
+        <button onClick={salvarFilme}>Salvar</button>
         <button>
           <a target="_blank" rel="noreferrer" href={`https://www.youtube.com/results?search_query=${filme.title} Trailer`}>Trailer</a>
         </button>
