@@ -1,9 +1,10 @@
+
 function Filme(){
     return(
-        <div>
-            Bem vindo a pagina de filme!!
-        </div>
-    );
-}
-
-export default Filme;
+      <div>
+        <h1>BEM VINDO A PAGINA DETALHES DO FILME</h1>
+      </div>
+    )
+  }
+  
+  export default Filme;

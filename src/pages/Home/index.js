@@ -1,9 +1,10 @@
+
 function Home(){
     return(
-        <div>
-            Bem vindo ao Home
-        </div>
-    );
-}
-
-export default Home;
+      <div>
+        <h1>BEM VINDO A HOME</h1>
+      </div>
+    )
+  }
+  
+  export default Home;
